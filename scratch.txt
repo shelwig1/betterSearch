@@ -1,0 +1,22 @@
+Pick a directory
+
+Go through all files in the directory
+
+Read each one
+
+Look for match
+
+
+Matching text
+
+Extracting text
+
+Making things happen in parallel
+
+----
+When we pick the directory, get the map
+When we search, execute the search
+
+Read a PDF
+Memory management -> how much do we need/want to allocate? Do we have enough to open this file?
+If the file is too big, open it in chunks, have it go through once, then change the size of the chunks and do it again
