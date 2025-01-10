@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const testDir = "C:\\Users\\seanh\\Documents\\Projects\\betterSearch\\test_files"
+//const testDir = "C:\\Users\\seanh\\Documents\\Projects\\betterSearch\\test_files"
 
 func main() {
 	fmt.Println("Hello, World!")
@@ -20,8 +20,8 @@ func main() {
 	   	fmt.Println("Bump")
 	   	fmt.Println("Used CPUs: ", runtime.GOMAXPROCS(0))
 	*/
-	dirMap := GetDirectoryMap(testDir)
-	TraverseDirectoryMap(dirMap)
+	//dirMap := GetDirectoryMap(testDir)
+	//TraverseDirectoryMap(dirMap)
 
 }
 
