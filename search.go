@@ -1,12 +1,27 @@
 package main
 
-import "sync"
+import "fmt"
 
-func Search(directoryMap []string, target string) {
-	var wg sync.WaitGroup
+func Search(directoryMap []string, target string) []Result {
+	// ch := make(chan Result)
+	length := len(directoryMap)
+	ch := make(chan Result, length)
+
+	var results []Result
 
 	for _, file := range directoryMap {
-		wg.Add(1)
-		go HandleFile(target, file, &wg)
+		go HandleFile(target, file, ch)
 	}
+
+	// for result := range ch {
+	// 	results = append(results, result)
+	// }
+
+	for i := 0; i < length; i++ {
+		results = append(results, <-ch)
+	}
+
+	fmt.Println("Results :", results)
+	return results
+
 }

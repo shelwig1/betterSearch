@@ -3,14 +3,32 @@ package main
 import (
 	"os"
 	"regexp"
-	"sync"
 )
 
-func HandleFile(target string, file string, wg *sync.WaitGroup) bool {
-	defer wg.Done()
+// wg *sync.WaitGroup
+// Add this back into arguments if we go back to WaitGroups
+
+// Testing this is going to be annoying - we'll figure it out
+func HandleFile(target string, file string, ch chan Result) {
+	// defer wg.Done()
+
+	var result Result
 
 	text := extractData(file)
-	return initialCheck(target, text)
+
+	// return initialCheck(target, text)
+
+	if initialCheck(target, text) {
+		result.target = target
+		result.file = file
+
+		ch <- result
+	} else {
+		<-ch
+	}
+
+	// Figure out why the fuck we need to do this
+	close(ch)
 }
 
 func extractData(file string) string {

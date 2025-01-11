@@ -1,11 +1,11 @@
 package main
 
 import (
-	"sync"
 	"testing"
 )
 
 const testDir = "C:\\Users\\seanh\\Documents\\Projects\\betterSearch\\test_files\\dirTest\\testFile.txt"
+const higherDir = "C:\\Users\\seanh\\Documents\\Projects\\betterSearch\\test_files"
 
 func TestExtractData(t *testing.T) {
 	answer := "Here is an example of my text. Pineapple."
@@ -26,12 +26,24 @@ func TestInitialCheck(t *testing.T) {
 	}
 }
 
+// func TestHandleFile(t *testing.T) {
+// 	var wg sync.WaitGroup
+
+// 	result := HandleFile("Pineapple", testDir, &wg)
+
+//		if !result {
+//			t.Errorf("HandleFile failed")
+//		}
+//	}
 func TestHandleFile(t *testing.T) {
-	var wg sync.WaitGroup
+	ch := make(chan Result)
 
-	result := HandleFile("Pineapple", testDir, &wg)
+	go HandleFile("Pineapple", testDir, ch)
 
-	if !result {
-		t.Errorf("HandleFile failed")
+	result := <-ch
+
+	if result.file != testDir || result.target != "Pineapple" {
+		t.Errorf("Expected result with:\ntarget: \"Pineapple\"\nfile : file ending with testFile.txt")
 	}
+
 }
