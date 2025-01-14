@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"sync"
 )
 
 // Recursive reading of directories
@@ -31,6 +30,7 @@ func GetDirectoryMap(dir string) []string {
 	return files
 }
 
+/*
 func TraverseDirectoryMap(directoryMap []string) {
 	var wg sync.WaitGroup
 
@@ -69,3 +69,4 @@ func ReadFile(dir string) {
 
 	data = nil
 }
+*/

@@ -5,7 +5,7 @@ import "fmt"
 func Search(directoryMap []string, target string) []Result {
 	// ch := make(chan Result)
 	length := len(directoryMap)
-	ch := make(chan Result, length)
+	ch := make(chan Result, 0)
 
 	var results []Result
 
@@ -18,7 +18,11 @@ func Search(directoryMap []string, target string) []Result {
 	// }
 
 	for i := 0; i < length; i++ {
-		results = append(results, <-ch)
+		value := <-ch
+		fmt.Println("Search function received: ", value)
+		// results = append(results, <-ch)
+		results = append(results, value)
+
 	}
 
 	fmt.Println("Results :", results)

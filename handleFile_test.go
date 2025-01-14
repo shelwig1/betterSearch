@@ -4,12 +4,12 @@ import (
 	"testing"
 )
 
-const testDir = "C:\\Users\\seanh\\Documents\\Projects\\betterSearch\\test_files\\dirTest\\testFile.txt"
-const higherDir = "C:\\Users\\seanh\\Documents\\Projects\\betterSearch\\test_files"
+const testDir = projectDir + "test_files\\dirTest\\testFile.txt"
+const higherDir = projectDir + "test_files"
 
 func TestExtractData(t *testing.T) {
 	answer := "Here is an example of my text. Pineapple."
-	result := extractData(testDir)
+	result, _ := extractData(testDir)
 
 	if result != answer {
 		t.Errorf("Expected answer, got %s", result)
