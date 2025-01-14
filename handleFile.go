@@ -8,38 +8,37 @@ import (
 	"regexp"
 )
 
-// wg *sync.WaitGroup
-// Add this back into arguments if we go back to WaitGroups
-
-// Testing this is going to be annoying - we'll figure it out
+// Current implementation means we can't just send an empty struct because it's not of type Result
+// So we just set the fucker with a flag that immediately lets it be discarded as needed
 func HandleFile(target string, file string, ch chan Result) {
-	// defer wg.Done()
-
-	// Not returning because we're pulling files we can't pull data from
-	// Check the type of the file, if it's bad news return an error
 	fmt.Println("File started processing: ", file)
 
 	var result Result
+	result.target = target
+	result.file = file
 
 	text, err := extractData(file)
 	if err != nil {
 		fmt.Println("Error extracting text from ", file, " : ", err)
-		<-ch
+
+		result.valid = false
+		ch <- result
+
 		return
 	}
 
 	if initialCheck(target, text) {
-		result.target = target
-		result.file = file
-
-		ch <- result
+		result.valid = true
 	} else {
-		<-ch
+		result.valid = false
 	}
+
+	ch <- result
 
 }
 
 // We can offload any issues here -> return an error if we find something gay
+// Next step is making it so we handle different file types
 func extractData(file string) (string, error) {
 	// Check the file type
 	ext := filepath.Ext(file)
