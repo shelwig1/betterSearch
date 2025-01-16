@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 )
 
@@ -30,43 +31,15 @@ func GetDirectoryMap(dir string) []string {
 	return files
 }
 
-/*
-func TraverseDirectoryMap(directoryMap []string) {
-	var wg sync.WaitGroup
+// Opens passed file with default OS application
+func OpenFileInOS(path string) error {
+	cmd := exec.Command("cmd", "/C", "start", "", path)
+	err := cmd.Start()
 
-	for _, file := range directoryMap {
-		wg.Add(1)
-		go handleFile(file, &wg)
-	}
-
-	wg.Wait()
-}
-
-// Figure out channels I guess
-
-// We can do the queuing thing for how much active memory we want to use so we don't bomb the fucking computer
-// Channels may be the way to handle this one
-
-// Channels -> send updated memory values between goroutines
-// Mutexes -> protect shared memory when goroutines update the avaiable memory
-func handleFile(path string, wg *sync.WaitGroup) {
-	defer wg.Done()
-	ReadFile(path)
-	//fmt.Println("File name: ", path)
-}
-
-// What does reading from a text file return?
-// Need to check if we can load the whole fucker into memory
-// How to clear it out?
-// May want to stream this fucker but I'm worried about missing a match along a chunk
-func ReadFile(dir string) {
-	data, err := os.ReadFile(dir)
 	if err != nil {
-		panic(err)
+		fmt.Println("Error opening file: ", err)
+		return err
 	}
 
-	fmt.Println(string(data))
-
-	data = nil
+	return nil
 }
-*/

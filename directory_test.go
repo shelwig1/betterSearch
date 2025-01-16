@@ -13,3 +13,9 @@ func TestGetDirectoryMap(t *testing.T) {
 	}
 
 }
+
+func TestOpenFileInOS(t *testing.T) {
+	path := "C:\\Programming Projects\\betterSearch\\betterSearch\\test_files\\test.txt"
+
+	OpenFileInOS(path)
+}
