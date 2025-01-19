@@ -34,9 +34,9 @@ func (a *App) GoHello() string {
 }
 
 func (a *App) GetDirectoryMap(dir string) []string {
-	return a.GetDirectoryMap(dir)
+	return a.dirUtils.GetDirectoryMap(dir)
 }
 
-func (a *App) openFileInOS(dir string) error {
-	return a.openFileInOS(dir)
+func (a *App) ChooseDirectory() (string, error) {
+	return a.dirUtils.ChooseDirectory()
 }

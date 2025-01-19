@@ -8,7 +8,7 @@ import (
 const searchTestDir = projectDir + "test_files"
 
 func TestSearch(t *testing.T) {
-	dirMap := getDirectoryMap(searchTestDir)
+	dirMap := GetDirectoryMap(searchTestDir)
 	target := "Pineapple"
 
 	Search(dirMap, target)

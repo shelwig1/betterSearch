@@ -1,4 +1,4 @@
-package backend
+package main
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 type DirUtils struct{}
 
 // Recursive reading of directories
-func (d *DirUtils) GetDirectoryMap(dir string) []string {
+func GetDirectoryMap(dir string) []string {
 	var files []string
 
 	err := filepath.WalkDir(dir, func(path string, d os.DirEntry, err error) error {
@@ -36,7 +36,7 @@ func (d *DirUtils) GetDirectoryMap(dir string) []string {
 }
 
 // Opens passed file with default OS application
-func (d *DirUtils) OpenFileInOS(path string) error {
+func OpenFileInOS(path string) error {
 	cmd := exec.Command("cmd", "/C", "start", "", path)
 	err := cmd.Start()
 
@@ -48,15 +48,21 @@ func (d *DirUtils) OpenFileInOS(path string) error {
 	return nil
 }
 
-func (d *DirUtils) ChooseDirectory() (string, error) {
+func ChooseDirectory() (string, error) {
+	// cmd := exec.Command("explorer")
+	// err := cmd.Start()
+	// if err != nil {
+	// 	return err
+	// }
+
+	// return nil
 
 	dir, err := dialog.Directory().Title("Select a folder").Browse()
 	if err != nil {
 		return "", err
 	}
 
-	// sanitizedDir := strings.ReplaceAll(dir, "\\", "//")
+	swappedSlashes := filepath.ToSlash(dir)
 
-	return dir, err
-
+	return swappedSlashes, nil
 }

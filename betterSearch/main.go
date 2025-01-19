@@ -15,7 +15,6 @@ func main() {
 	// Create an instance of the app structure
 	app := NewApp()
 	// create an instance of our new struct type
-	dirHelper := new(DirUtils)
 
 	// Create application with options
 	err := wails.Run(&options.App{
@@ -29,6 +28,7 @@ func main() {
 		OnStartup:        app.startup,
 		Bind: []interface{}{
 			app,
+			// &myStruct{},
 		},
 	})
 

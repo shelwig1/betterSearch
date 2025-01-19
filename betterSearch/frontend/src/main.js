@@ -1,26 +1,32 @@
-import './style.css';
-import './app.css';
+// import './style.css';
+// import './app.css';
 
 import logo from './assets/images/logo-universal.png';
-import {Greet} from '../wailsjs/go/main/App';
+import {ChooseDirectory, GetDirectoryMap, Greet} from '../wailsjs/go/main/App';
 
-document.querySelector('#app').innerHTML = `
-    <img id="logo" class="logo">
-      <div class="result" id="result">Please enter your name below 👇</div>
-      <div class="input-box" id="input">
-        <input class="input" id="name" type="text" autocomplete="off" />
-        <button class="btn" onclick="greet()">Greet</button>
-      </div>
-    </div>
-`;
-document.getElementById('logo').src = logo;
+const chooseDirButton = document.getElementById("choose-dir-button")
 
-let nameElement = document.getElementById("name");
-nameElement.focus();
-let resultElement = document.getElementById("result");
+let currentDirectoryMap
 
-// Setup the greet function
+chooseDirButton.addEventListener("click", async () => {
+    console.log("Directory button clicked")
+
+    try {
+        const result = await ChooseDirectory()
+
+        console.log("Full result: ", result)
+        currentDirectoryMap = GetDirectoryMap(result)
+        
+    } catch (err) {
+        console.log("Catch triggered: ", err)
+    }
+
+})
+
 window.greet = function () {
+
+    console.log(GoHello())
+
     // Get name
     let name = nameElement.value;
 
