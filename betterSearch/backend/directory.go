@@ -1,4 +1,4 @@
-package main
+package backend
 
 import (
 	"fmt"
@@ -7,8 +7,18 @@ import (
 	"path/filepath"
 )
 
+type DirUtils struct{}
+
+func (d *DirUtils) GetDirectoryMap(dir string) []string {
+	return getDirectoryMap(dir)
+}
+
+func (d *DirUtils) openFileInOS(dir string) error {
+	return openFileInOS(dir)
+}
+
 // Recursive reading of directories
-func GetDirectoryMap(dir string) []string {
+func getDirectoryMap(dir string) []string {
 	var files []string
 
 	err := filepath.WalkDir(dir, func(path string, d os.DirEntry, err error) error {
@@ -32,7 +42,7 @@ func GetDirectoryMap(dir string) []string {
 }
 
 // Opens passed file with default OS application
-func OpenFileInOS(path string) error {
+func openFileInOS(path string) error {
 	cmd := exec.Command("cmd", "/C", "start", "", path)
 	err := cmd.Start()
 

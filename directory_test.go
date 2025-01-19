@@ -6,7 +6,7 @@ import (
 )
 
 func TestGetDirectoryMap(t *testing.T) {
-	result := GetDirectoryMap(projectDir + "test_files")
+	result := getDirectoryMap(projectDir + "test_files")
 
 	for _, v := range result {
 		fmt.Println(v)
@@ -17,5 +17,5 @@ func TestGetDirectoryMap(t *testing.T) {
 func TestOpenFileInOS(t *testing.T) {
 	path := "C:\\Programming Projects\\betterSearch\\betterSearch\\test_files\\test.txt"
 
-	OpenFileInOS(path)
+	openFileInOS(path)
 }

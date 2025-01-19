@@ -1,0 +1,13 @@
+Go to apps.go
+
+Instantiate the struct we need
+
+Define the function within the app.go file
+-------------------------
+
+
+Planning the deal
+
+User selects a directory and calls the DirectoryMap function
+
+
