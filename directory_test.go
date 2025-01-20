@@ -14,6 +14,15 @@ func TestGetDirectoryMap(t *testing.T) {
 
 }
 
+func TestGetDirectoryMap2(t *testing.T) {
+	result := GetDirectoryMap("C:\\Program Files")
+
+	for _, v := range result {
+		fmt.Println(v)
+	}
+
+}
+
 func TestOpenFileInOS(t *testing.T) {
 	path := "C:\\Programming Projects\\betterSearch\\betterSearch\\test_files\\test.txt"
 

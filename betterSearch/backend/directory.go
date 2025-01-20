@@ -12,6 +12,8 @@ import (
 type DirUtils struct{}
 
 // Recursive reading of directories
+
+// Change it so we only pull files we can read
 func (d *DirUtils) GetDirectoryMap(dir string) []string {
 	var files []string
 

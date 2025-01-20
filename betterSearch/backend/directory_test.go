@@ -1,6 +1,7 @@
 package backend
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -23,7 +24,7 @@ func TestOpenFileInOS(t *testing.T) {
 	dirUtils.OpenFileInOS(path)
 }
 
-/* func TestOpenFileExplorer(t *testing.T) {
+func TestOpenFileExplorer(t *testing.T) {
 	dirUtils := &DirUtils{}
 
 	dir, err := dirUtils.ChooseDirectory()
@@ -33,4 +34,3 @@ func TestOpenFileInOS(t *testing.T) {
 		fmt.Println("Directory: ", dir)
 	}
 }
-*/
