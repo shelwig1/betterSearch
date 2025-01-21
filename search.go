@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+type SearchStruct struct{}
+
 func Search(directoryMap []string, target string) []Result {
 	// ch := make(chan Result)
 	length := len(directoryMap)
