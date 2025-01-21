@@ -7,7 +7,7 @@ import {ChooseDirectory, GetDirectoryMap, Greet} from '../wailsjs/go/main/App';
 const chooseDirButton = document.getElementById("choose-dir-button") as HTMLButtonElement
 const currentDirDisplay = document.getElementById("current-dir") as HTMLDivElement
 const searchReadyStatus = document.getElementById("search-ready-status") as HTMLDivElement
-const throbber = document.getElementById("throbber") as HTMLElement
+const dirMapThrobber= document.getElementById("dir-map-throbber") as HTMLElement
 
 let currentDirectory
 let currentDirectoryMap
@@ -28,19 +28,26 @@ chooseDirButton.addEventListener("click", async () => {
 
 })
 
+// Current implementation is weird - may turn this into a React project and make everything "cleaner"
 async function setCurrentDirectory(dir : string) {
     searchReadyStatus.innerHTML = "Not ready to search"
 
-    throbber.style.display = "block"
-
+    dirMapThrobber.style.display = "block"
 
     currentDirectory = dir
 
     currentDirDisplay.innerHTML = "Current directory: " + dir
 
-    currentDirectoryMap = await GetDirectoryMap(dir)
+    // Need to figure out a way to handle errors on this one too
+    // Figure out if this breaks anything
+    try {
+        currentDirectoryMap = await GetDirectoryMap(dir)
+    } catch (err) {
+        searchReadyStatus.innerHTML = "Unable to access directory" 
+        return
+    }
 
-    throbber.style.display = "none"
+    dirMapThrobber.style.display = "none"
 
     searchReadyStatus.innerHTML = "Ready to search!"
 
