@@ -11,10 +11,12 @@ import (
 
 type DirUtils struct{}
 
+var currentDirectoryMap []string
+
 // Recursive reading of directories
 
 // Change it so we only pull files we can read
-func (d *DirUtils) GetDirectoryMap(dir string) []string {
+func (d *DirUtils) GenerateDirectoryMap(dir string) []string {
 	var files []string
 
 	err := filepath.WalkDir(dir, func(path string, d os.DirEntry, err error) error {
@@ -34,7 +36,12 @@ func (d *DirUtils) GetDirectoryMap(dir string) []string {
 		fmt.Println("Error walking filepath: ", err)
 	}
 
+	currentDirectoryMap = files
 	return files
+}
+
+func GetCurrentDirectoryMap() []string {
+	return currentDirectoryMap
 }
 
 // Opens passed file with default OS application

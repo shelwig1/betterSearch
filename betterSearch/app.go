@@ -6,11 +6,14 @@ import (
 	"fmt"
 )
 
+// Feels suboptimal that we're putting this here....
+
 // App struct
 type App struct {
-	ctx       context.Context
-	wailsTest *backend.WailsTest
-	dirUtils  *backend.DirUtils
+	ctx          context.Context
+	wailsTest    *backend.WailsTest
+	dirUtils     *backend.DirUtils
+	searchStruct *backend.SearchStruct
 }
 
 // NewApp creates a new App application struct
@@ -33,10 +36,15 @@ func (a *App) GoHello() string {
 	return a.wailsTest.GoHello()
 }
 
-func (a *App) GetDirectoryMap(dir string) []string {
-	return a.dirUtils.GetDirectoryMap(dir)
+func (a *App) GenerateDirectoryMap(dir string) []string {
+	return a.dirUtils.GenerateDirectoryMap(dir)
 }
 
 func (a *App) ChooseDirectory() (string, error) {
 	return a.dirUtils.ChooseDirectory()
+}
+
+// How do we handle fucking uhhhh structs getting passed between the front and back?
+func (a *App) Search(target string) []backend.Result {
+	return a.searchStruct.Search(target)
 }
