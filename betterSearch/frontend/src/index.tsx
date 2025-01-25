@@ -1,8 +1,12 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client'; 
+
 import './style.css';
 import './app.css';
 
+import App from './App.js'
 // import logo from './assets/images/logo-universal.png';
-import {ChooseDirectory, GetDirectoryMap, Greet} from '../wailsjs/go/main/App';
+import {ChooseDirectory, GetDirectoryMap, Greet} from '../wailsjs/go/main/App.js';
 
 const chooseDirButton = document.getElementById("choose-dir-button") as HTMLButtonElement
 const currentDirDisplay = document.getElementById("current-dir") as HTMLDivElement
@@ -12,6 +16,14 @@ const dirMapThrobber= document.getElementById("dir-map-throbber") as HTMLElement
 let currentDirectory
 let currentDirectoryMap
 
+console.log("Test of this doodad")
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 chooseDirButton.addEventListener("click", async () => {
     console.log("Directory button clicked")
