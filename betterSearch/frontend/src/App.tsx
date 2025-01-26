@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
+import './style.css';
+import './app.css';
+
 interface SearchResultProp {
     target : string;
     file : string;
@@ -8,7 +11,15 @@ interface SearchResultProp {
 const App = () => {
     return (
         <div>
-            <h1>Hello from React in Wails!</h1>
+            <div id="dir-ops-container">
+                <div id="current-dir">Current directory: </div>
+                <div id="search-ready-status">Not ready to search</div>
+                <div className="throbber" id="dir-map-throbber"></div>        
+            </div>
+
+        <button id="choose-dir-button">Choose Directory</button>
+        <TestButton />
+        <SearchResultContainer />
         </div>
     )
 }
@@ -27,6 +38,15 @@ const SearchResultContainer = () => {
             handleNewResult(newResults)
         }
     }) */
+    useEffect(() => {
+        const fetchData = () => {
+            const newResults = mockSearchData()
+            setResults(newResults)
+        }
+        fetchData()
+    }, [])
+
+
     return (
         <div id='searchResultsContainer'>
             {results.map((result, index) => (
@@ -37,14 +57,30 @@ const SearchResultContainer = () => {
 }
 const SearchResultCard: React.FC<SearchResultProp> = ({target, file}) => {
     return (
-        <div className='searchResultCard'>
+        <button className='searchResultCard' onClick={() => console.log("result testicles")}>
             <p>{target}</p>
             <p>{file}</p>
-        </div>
+        </button>
     )
 }
 //ReactDOM.render(<App />, document.getElementById('app'))
 
+const TestButton: React.FC = () => {
+    return (
+        <button onClick={() => console.log("Testicles")}>
+            Testicles Button
+        </button>
+    )
+}
+
+const mockSearchData = () => {
+    // Simulating some mock data
+    return [
+      { target: 'Target 1', file: 'File 1' },
+      { target: 'Target 2', file: 'File 2' },
+      { target: 'Target 3', file: 'File 3' },
+    ];
+  };
 
 
 export default App;

@@ -20,3 +20,15 @@ body{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.searchResultCard {
+  border: 3px solid #3498db; /* Added space between solid and color */
+  padding: 10px;
+  display: grid;
+  justify-items: start
+}
+
+#searchResultsContainer {
+  display: grid;
+  grid-template-columns: 1fr
+}
